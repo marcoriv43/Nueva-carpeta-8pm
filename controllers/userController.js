@@ -6,7 +6,7 @@ const users = [
 class UserController {
     // Método para crear un nuevo usuario
     createUser(req, res) {
-        const { id, name, email } = req.body;
+        const {name, email } = req.body;
         // Buscar si el usuario ya existe
         const existingUser = users.find(user => user.email === email);
         if (existingUser) {
@@ -14,7 +14,9 @@ class UserController {
             return;
         }
         // Si no existe, agregarlo al arreglo
-        users.push({ id: users.length + 1, name, email });
+        const id = Math.floor(Math.random() * 1000000);
+        console.log(id)
+        users.push({ id, name, email });
         res.status(201).json({ message: 'Usuario creado', user: { name, email } });
     }
 
